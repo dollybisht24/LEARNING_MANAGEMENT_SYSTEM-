@@ -34,6 +34,22 @@ app.use(express.urlencoded({ limit: '10mb', extended: true }));
 // ================== LOGGER MIDDLEWARE ==================
 app.use(logger);
 
+// ================== ROOT ROUTE ==================
+app.get('/', (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: 'Learning Management System API',
+    version: '1.0.0',
+    endpoints: {
+      health: '/health',
+      auth: '/api/v1/auth',
+      courses: '/api/v1/courses',
+      enrollments: '/api/v1/enrollments',
+    },
+    documentation: 'Check API_DOCUMENTATION.md for detailed API documentation',
+  });
+});
+
 // ================== HEALTH CHECK ==================
 app.get('/health', (req, res) => {
   res.status(200).json({
